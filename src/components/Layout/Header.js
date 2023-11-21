@@ -7,7 +7,7 @@ const Header = () => {
     return (
 
         <header>
-            <div className="nav-brans">
+            <div className="nav-brand">
                 <a to="/">
                     <span>Magic Flames</span>
                     <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-shopping-cart" width="30"
