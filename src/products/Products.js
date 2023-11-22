@@ -1,6 +1,7 @@
 import ListItem from "./ListItems/ListItem"
 import {useEffect, useState} from 'react'
 import axios from 'axios'
+import Loader from "../components/Layout/UI/Loader"
 
 
 
@@ -13,8 +14,8 @@ const Products = () =>
     useEffect(()=>{
         const fetchData = async ()=>{
             try{
-            const response = await axios.get("https://mocki.io/v1/83dda85a-9d87-46e3-a0a0-a4fdefc9c0d0")
-            const data=response.data.items
+            const response = await axios.get("https://cart-checkout-a1fef-default-rtdb.firebaseio.com/items.json")
+            const data=response.data
             const transformedData = data.map((item,index)=>{
                 return {
                     ...item,
@@ -31,10 +32,12 @@ const Products = () =>
         fetchData()
     },[])
     return (
+        <>
+        
         <div className="product-list">
             <div className="product-list--wrapper">
                 {
-                    loader? <h1>Loading....</h1>: items.map((item,index)=>{
+                    items.map((item,index)=>{
                         return <ListItem key={index} data={item}/>
 
                     })
@@ -44,6 +47,8 @@ const Products = () =>
             </div>
 
         </div>
+        {loader && <Loader/>}
+        </>
     )
 }
 

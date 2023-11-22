@@ -1,11 +1,13 @@
 import AddToCartIcon from "../../assets/icons/add_cart.png"
-import {useState} from 'react'
+import {Fragment, useState} from 'react'
+import Modal from "../../components/Layout/UI/Modal"
 
 
 const ListItem = ({data}) =>{
 
 
     const [counter,setCounter] = useState(0)
+    const [showModal,setShowModal]=useState(false)
 
     const increaseCounterByOne = ()=>{
         setCounter(counter+1)
@@ -20,11 +22,16 @@ const ListItem = ({data}) =>{
         
     }
 
+    const handleModal = () =>{
+        setShowModal(prevState=>!prevState)
+    }
+
 
  
 
     return (
-        <div className="item-card">
+        <Fragment>
+        <div className="item-card" onClick={handleModal}>
             <img className="img-fluid" src={`/assets/${data.thumbnail}`} alt="imagetitle" ></img>
             <div className="item-card__information">
                 <div className="pricing"><span>{data.discountedPrice}</span>
@@ -54,6 +61,11 @@ const ListItem = ({data}) =>{
         
 
         </div>
+        {
+            showModal && <Modal onClose={handleModal}/>
+        }
+        </Fragment>
+
     )
 }
 
